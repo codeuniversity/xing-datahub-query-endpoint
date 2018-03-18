@@ -7,7 +7,7 @@ install:
 - make dep
 before_script:
 - docker-compose -f docker-compose.test.yml up -d
-- sleep 180
+- sleep 210
 script:
 - python query_endpoint_test.py
 - docker-compose -f docker-compose.test.yml down
