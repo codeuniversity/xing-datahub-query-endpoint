@@ -1,0 +1,16 @@
+language: python
+python:
+- '3.6'
+services:
+- docker
+install:
+- make dep
+before_script:
+- docker-compose -f docker-compose.test.yml up -d
+- sleep 180
+script:
+- python query_endpoint_test.py
+- docker-compose -f docker-compose.test.yml down
+notifications:
+  slack:
+    secure: qT7ICj8S34PjO9TcfQsd3zEYfw0BMKS4s6stP81pfJr19xvZ0ayDNtjrONwA0/wDnnRSX6DaZA9KqsBXDhKmzX0ctGvFyR0pDNVGOSgx/1zdP0kDhwbal9wJ4IOWpgEmFRwQgTIjTzzEEIgd7yn9JlODextvMfVfyi5C5XcwUOAq0LbrhpJbftrbMlgG+tovsXxZ6KRLrSKsYmzbnTobx21+tz6KjMnUVnTsz72btfoK2lQNJjJ9p6o3ydDfWTqvpu+2DUv9V9d3iskqC6IfmCMQSLZvZEoMYexM70ssao932akqwJynF595vIOrb0Ih3qtRBi94ai/83F9M3k/vHNa7J9bQE+qVyJAnKtqA93nbFOj/V99TVTXVAbKcePJK05zYoQV4CPDw2aHBFSHac4ba6MV6OkLSadS0NBlxDp7Zi/o12SWywCZ/CPuV8XXd+3DaDlSxx/PGBOi3w6KLa+sPp7UP/xkOXzEO7lv6lX/RixbE38SHcBN12/nv09q3gyfurB3M3H+7EKE7NnMUq0VyPjrva80bYdWjjNmCdrTEsgMjWq2A578ivQKYABruHHnIaGST7VM5qvHjh9vexCaUayvz2oMQ0w6VEzNaCVugT2ltoJTqPP1T7sK2pUnxlawLLGCbkpc8GayRc/UBh1QT5pa0UYcdMtIFfeaf0PM=
