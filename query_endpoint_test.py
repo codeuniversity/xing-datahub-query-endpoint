@@ -6,10 +6,12 @@ import requests
 import subprocess
 import os
 import time
+
 try:
   python_path = os.environ['PYTHON_PATH']
 except KeyError:
-  python_path = '{}/env/bin/python'.format(os.getcwd()
+  python_path = '{}/env/bin/python'.format(os.getcwd())
+
 proc = subprocess.Popen([python_path, 'query_endpoint.py'], env={'token': '12345678'}, preexec_fn=os.setsid)
 base_url = 'http://localhost:3003/'
 
