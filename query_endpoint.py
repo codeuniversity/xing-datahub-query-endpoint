@@ -34,6 +34,7 @@ async def metrics_middleware(request, handler):
 @web.middleware
 async def check_token_middleware(request, handler):
   if request.headers.get('access-token') != os.environ['token']:
+    print(request.headers.get('access-token'))
     return web.json_response({'error': 'not_allowed'}, status=401)
   return await handler(request)
 

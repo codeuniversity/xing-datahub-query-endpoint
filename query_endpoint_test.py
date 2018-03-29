@@ -3,17 +3,9 @@ import aiohttp
 import unittest
 import json
 import requests
-import subprocess
-import os
+
 import time
 
-try:
-  python_path = os.environ['PYTHON_PATH']
-except KeyError:
-  python_path = '{}/env/bin/python'.format(os.getcwd())
-
-proc = subprocess.Popen([python_path, 'query_endpoint.py'], env={'token': '12345678'}, preexec_fn=os.setsid)
-base_url = 'http://localhost:3003/'
 
 class EndpointTestCase(unittest.TestCase):
   def test_auth(self):
@@ -33,5 +25,3 @@ class EndpointTestCase(unittest.TestCase):
 
 time.sleep(3)
 unittest.main()
-os.killpg(os.getpgid(pro.pid), signal.SIGTERM)
-time.sleep(3)
