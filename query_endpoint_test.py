@@ -6,7 +6,7 @@ import requests
 
 import time
 
-
+base_url = 'http://localhost:3003/'
 class EndpointTestCase(unittest.TestCase):
   def test_auth(self):
     result = requests.get(base_url + 'users')
