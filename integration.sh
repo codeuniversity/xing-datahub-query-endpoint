@@ -3,7 +3,7 @@
 docker-compose -f docker-compose.test.yml up -d
 sleep 160
 docker build -t endpoint_test .
-docker run -p 3002:3002 --net="host" -d --rm --name tested endpoint_test
+docker run -e "token=$TOKEN" -p 3002:3002 --net="host" -d --rm --name tested endpoint_test
 
 python query_endpoint_test.py
 if [ $? -eq 1 ]
