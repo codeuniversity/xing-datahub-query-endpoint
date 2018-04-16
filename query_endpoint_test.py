@@ -22,6 +22,12 @@ class EndpointTestCase(unittest.TestCase):
     result = requests.get(base_url + 'target_users', headers={'access-token': '12345678'})
     self.assertDictEqual(result.json()[0], {'user_id': 42})
 
+  def test_target_item(self):
+    hive_handler.cursor.execute('INSERT INTO TABLE target_items select 42')
+
+    result = requests.get(base_url + 'target_items', headers={'access-token': '12345678'})
+    self.assertDictEqual(result.json()[0], {'item_id': 42})
+
 
 time.sleep(3)
 unittest.main()
