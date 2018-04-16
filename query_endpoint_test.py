@@ -28,6 +28,16 @@ class EndpointTestCase(unittest.TestCase):
     result = requests.get(base_url + 'target_items', headers={'access-token': '12345678'})
     self.assertDictEqual(result.json()[0], {'item_id': 42})
 
+  def test_no_token(self):
+    hive_handler.cursor.execute('INSERT INTO TABLE target_items select 42')
+    result = requests.get(base_url + 'target_items')
+    self.assertDictEqual(result.status_code, 401)
+
+  def test_incorrect_token(self):
+    hive_handler.cursor.execute('INSERT INTO TABLE target_items select 42')
+    result = requests.get(base_url + 'target_items', headers={'access-token': '87654321'})
+    self.assertDictEqual(result.status_code, 401)
+
 
 time.sleep(3)
 unittest.main()
